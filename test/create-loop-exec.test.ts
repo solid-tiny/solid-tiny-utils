@@ -32,11 +32,11 @@ describe('createLoopExec', () => {
     expect(mockFn).toHaveBeenCalledTimes(3);
   });
 
-  it('should execute function repeatedly with reactive delay', async () => {
+  it('should work with reactive delay', async () => {
     const mockFn = vi.fn();
 
     const setDelay = createRoot(() => {
-      const [delay, s] = createSignal(100);
+      const [delay, s] = createSignal<number | false>(100);
 
       createLoopExec(mockFn, delay);
       return s;
@@ -55,6 +55,17 @@ describe('createLoopExec', () => {
 
     await vi.advanceTimersByTimeAsync(200);
     expect(mockFn).toHaveBeenCalledTimes(4);
+
+    setDelay(false);
+    await vi.advanceTimersByTimeAsync(200);
+    expect(mockFn).toHaveBeenCalledTimes(4); // Should not be called again
+
+    setDelay(100);
+    expect(mockFn).toHaveBeenCalledTimes(5); // Should be called again after setting delay
+
+    setDelay(-1);
+    await vi.advanceTimersByTimeAsync(100);
+    expect(mockFn).toHaveBeenCalledTimes(5); // Should not be called again with negative delay
   });
 
   it('should handle async functions', async () => {
@@ -146,6 +157,28 @@ describe('createLoopExec', () => {
     // Advance by zero delay
     await vi.advanceTimersByTimeAsync(0);
     expect(mockFn).toHaveBeenCalledTimes(2);
+  });
+
+  it('should not execute if delay is negative or false', async () => {
+    const mockFn = vi.fn();
+    const delay = -100;
+
+    createRoot(() => {
+      createLoopExec(mockFn, delay);
+    });
+
+    // Advance timers - function should still not be called
+    await vi.advanceTimersByTimeAsync(10_000);
+    expect(mockFn).toHaveBeenCalledTimes(0);
+
+    const mockFalseFn = vi.fn();
+    createRoot(() => {
+      createLoopExec(mockFalseFn, false);
+    });
+
+    // Advance timers - function should still not be called
+    await vi.advanceTimersByTimeAsync(10_000);
+    expect(mockFalseFn).toHaveBeenCalledTimes(0);
   });
 
   it('should able to stop and start manually', async () => {
