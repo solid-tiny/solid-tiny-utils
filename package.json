@@ -1,0 +1,56 @@
+{
+  "name": "solid-tiny-utils",
+  "version": "0.0.0",
+  "description": "A collection of tiny utilities for SolidJS applications",
+  "main": "./dist/index.js",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "vite",
+    "test": "vitest",
+    "test:run": "vitest --run",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "lint": "npx ultracite lint",
+    "lint:fix": "npx ultracite format",
+    "type-check": "tsc --noEmit --skipLibCheck",
+    "release": "pnpm lint:fix && pnpm test:run &&commit-and-tag-version -i CHANGELOG.md --same-file",
+    "pub": "pnpm build && pnpm publish",
+    "prepare": "husky"
+  },
+  "sideEffects": false,
+  "peerDependencies": {
+    "solid-js": "^1.9.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.1.2",
+    "@vitest/ui": "^3.2.4",
+    "commit-and-tag-version": "^12.5.1",
+    "husky": "^9.1.7",
+    "jsdom": "^26.1.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3",
+    "ultracite": "5.1.2",
+    "unocss": "^66.3.3",
+    "vite": "^6.2.1",
+    "vite-plugin-solid": "^2.11.0",
+    "vitest": "^3.2.4"
+  },
+  "keywords": [
+    "solidjs",
+    "solid",
+    "utilities",
+    "reactive",
+    "typescript",
+    "utils"
+  ],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@10.12.1",
+  "dependencies": {
+    "solid-tiny-context": "0.1.2"
+  }
+}
