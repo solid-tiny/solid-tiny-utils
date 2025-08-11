@@ -1,3 +1,5 @@
+import { isServer } from 'solid-js/web';
+
 // biome-ignore lint/complexity/noBannedTypes: is Function
 export function isFn(value: unknown): value is Function {
   return typeof value === 'function';
@@ -10,3 +12,5 @@ export function isArray<T>(value: unknown): value is T[] {
 export function isNumber(value: unknown): value is number {
   return typeof value === 'number' && !Number.isNaN(value);
 }
+
+export const isClient = !isServer;
