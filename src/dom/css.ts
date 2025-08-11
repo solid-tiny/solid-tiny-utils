@@ -1,4 +1,4 @@
-import { isClient } from '~/is';
+import { isClient } from '~/lodash';
 
 const alreadyInjected: string[] = [];
 

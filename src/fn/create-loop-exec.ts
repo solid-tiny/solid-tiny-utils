@@ -1,5 +1,5 @@
 import { onCleanup } from 'solid-js';
-import { isNumber } from '~/is';
+import { isNumber } from '~/lodash';
 import { access, createWatch } from '~/reactive';
 import type { MaybeAccessor, MaybePromise } from '~/types/maybe';
 
