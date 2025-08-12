@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.3.0](///compare/v0.2.0...v0.3.0) (2025-08-12)
+
+
+### Features
+
+* add more lodash utilities 138cec2
+
 ## [0.2.0](///compare/v0.1.0...v0.2.0) (2025-08-11)
 
 
