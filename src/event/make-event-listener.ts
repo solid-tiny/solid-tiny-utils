@@ -1,7 +1,7 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: I need any */
 import { onCleanup } from 'solid-js';
 import { noop } from '~/fn';
-import { isArray } from '~/lodash';
+import { clearArray, isArray } from '~/lodash';
 import type { Fn, MaybeArray } from '~/types';
 
 interface InferEventTarget<Events> {
@@ -130,7 +130,7 @@ export function makeEventListener(...args: any[]): Fn {
     for (const c of cleanups) {
       c();
     }
-    cleanups.length = 0;
+    clearArray(cleanups);
   };
 
   const register = (el: any, event: string, listener: any, opts: any) => {
@@ -144,11 +144,7 @@ export function makeEventListener(...args: any[]): Fn {
     )
   );
 
-  const stop = () => {
-    cleanup();
-  };
+  onCleanup(cleanup);
 
-  onCleanup(stop);
-
-  return stop;
+  return cleanup;
 }

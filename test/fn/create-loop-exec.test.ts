@@ -1,7 +1,7 @@
 import { createRoot, createSignal } from 'solid-js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createLoopExec } from '~/fn';
-import { ignoreRejections } from './common';
+import { ignoreRejections } from '../common';
 
 describe('createLoopExec', () => {
   beforeEach(() => {

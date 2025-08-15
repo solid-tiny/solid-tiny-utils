@@ -1,7 +1,7 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: I need any */
 import { onCleanup } from 'solid-js';
 import { noop } from '~/fn';
-import { isArray } from '~/lodash';
+import { clearArray, isArray } from '~/lodash';
 import { access, createWatch } from '~/reactive';
 import type { Fn, MaybeAccessor, MaybeArray } from '~/types';
 import {
@@ -70,7 +70,7 @@ export function createEventListener(...args: any[]): Fn {
     for (const c of cleanups) {
       c();
     }
-    cleanups.length = 0;
+    clearArray(cleanups);
   };
 
   createWatch(

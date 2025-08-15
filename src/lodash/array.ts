@@ -74,3 +74,10 @@ export const list = <T = number>(
 ): T[] => {
   return Array.from(range(startOrLength, end, valueOrMapper, step));
 };
+
+/**
+ * set arr.length to 0
+ */
+export function clearArray<T>(arr: T[]): void {
+  arr.length = 0;
+}
