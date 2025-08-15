@@ -9,7 +9,7 @@ export function createClickOutside(
     ignore?: MaybeAccessor<HTMLElement | null | undefined>[];
   }
 ) {
-  let shouldListen = true;
+  let shouldListen = false;
   const shouldIgnore = (event: PointerEvent) => {
     const ignore = (options?.ignore ? options.ignore : []).map(access);
     return ignore.some((el) => {
