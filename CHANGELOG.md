@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.0](///compare/v0.3.0...v0.4.0) (2025-08-15)
+
+
+### Features
+
+* add dataIf utility aa0e517
+* add make-event-listener and create-event-listener utilities c225192
+* add utilities 'createDebouncedWatch', 'createThrottle', 'clearArray' 4adafbc
+
 ## [0.3.0](///compare/v0.2.0...v0.3.0) (2025-08-12)
 
 
