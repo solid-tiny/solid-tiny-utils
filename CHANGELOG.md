@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.1](///compare/v0.4.0...v0.4.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* listen 'mousedown' to avoid issues with pointer events fdc3177
+* remove unnecessary onCleanup 7cd2fed
+
 ## [0.4.0](///compare/v0.3.0...v0.4.0) (2025-08-15)
 
 
