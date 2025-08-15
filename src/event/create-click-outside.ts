@@ -4,29 +4,56 @@ import { makeEventListener } from './make-event-listener';
 
 export function createClickOutside(
   target: MaybeAccessor<HTMLElement | null | undefined>,
-  handler: (event: MouseEvent | TouchEvent) => void,
+  handler: (event: PointerEvent) => void,
   options?: {
     ignore?: MaybeAccessor<HTMLElement | null | undefined>[];
   }
 ) {
-  const listener = (e: MouseEvent | TouchEvent) => {
+  let shouldListen = true;
+  const shouldIgnore = (event: PointerEvent) => {
+    const ignore = (options?.ignore ? options.ignore : []).map(access);
+    return ignore.some((el) => {
+      return el && (event.target === el || event.composedPath().includes(el));
+    });
+  };
+
+  const listener = (e: PointerEvent) => {
     const el = access(target);
-    if (!el || el.contains(e.target as Node)) {
+
+    if (!el || el === e.target || e.composedPath().includes(el)) {
       return;
     }
-    if (options?.ignore) {
-      for (const item of options.ignore) {
-        const ignoreEl = access(item);
-        if (
-          ignoreEl &&
-          (ignoreEl === e.target || ignoreEl.contains(e.target as Node))
-        ) {
-          return;
-        }
-      }
+
+    if (e.detail === 0) {
+      shouldListen = !shouldIgnore(e);
+    }
+
+    if (!shouldListen) {
+      shouldListen = true;
+      return;
     }
     handler(e);
   };
 
-  makeEventListener(document, ['click', 'touchstart'], listener);
+  const cleanups = [
+    makeEventListener('click', listener, { passive: true }),
+    makeEventListener(
+      'pointerdown',
+      (e) => {
+        const el = access(target);
+        if (el) {
+          shouldListen = !(e.composedPath().includes(el) || shouldIgnore(e));
+        }
+      },
+      { passive: true }
+    ),
+  ];
+
+  const stop = () => {
+    for (const cleanup of cleanups) {
+      cleanup();
+    }
+  };
+
+  return stop;
 }

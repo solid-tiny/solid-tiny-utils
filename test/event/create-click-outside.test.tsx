@@ -46,5 +46,17 @@ describe('createClickOutside', () => {
     expect(insideInner).toHaveTextContent('0');
     await user.click(outside);
     expect(insideInner).toHaveTextContent('1');
+
+    await user.pointer([{ keys: '[MouseLeft]>', target: inside }]);
+    await user.pointer([{ keys: '[/MouseLeft]', target: inside }]);
+    expect(insideInner).toHaveTextContent('1');
+
+    await user.pointer([{ keys: '[MouseLeft]>', target: outside }]);
+    await user.pointer([{ keys: '[/MouseLeft]', target: inside }]);
+    expect(insideInner).toHaveTextContent('2');
+
+    await user.pointer([{ keys: '[MouseLeft]>', target: inside }]);
+    await user.pointer([{ keys: '[/MouseLeft]', target: outside }]);
+    expect(insideInner).toHaveTextContent('2');
   });
 });
