@@ -1,6 +1,6 @@
-import { makeEventListener } from '@solid-primitives/event-listener';
 import { access } from '~/reactive';
 import type { MaybeAccessor } from '~/types';
+import { makeEventListener } from './make-event-listener';
 
 export function createClickOutside(
   target: MaybeAccessor<HTMLElement | null | undefined>,
@@ -28,6 +28,5 @@ export function createClickOutside(
     handler(e);
   };
 
-  makeEventListener(document, 'click', listener);
-  makeEventListener(document, 'touchstart', listener);
+  makeEventListener(document, ['click', 'touchstart'], listener);
 }
