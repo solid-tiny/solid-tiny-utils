@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.0](///compare/v0.4.2...v0.5.0) (2025-08-17)
+
+
+### Features
+
+* add 'createIntersectionObserver', 'createVisibilityObserver', 'combineStyle' and elses. e661d1d
+
 ## [0.4.2](///compare/v0.4.1...v0.4.2) (2025-08-15)
 
 
