@@ -34,7 +34,7 @@ import {
   title,
   trim,
   uid,
-} from '~/lodash';
+} from '~/utils';
 
 describe('lodash utilities', () => {
   describe('Array utilities', () => {

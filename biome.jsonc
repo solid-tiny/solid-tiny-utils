@@ -1,4 +1,22 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
-  "extends": ["ultracite"]
+  "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
+  "extends": ["ultracite"],
+  "linter": {
+    "rules": {
+      "style": {
+        "useAtIndex": "off",
+        "noMagicNumbers": "off"
+      },
+      "correctness": {
+        "useHookAtTopLevel": "off"
+      },
+      "suspicious": {
+        "noUnassignedVariables": "off"
+      },
+      "performance": {
+        "noBarrelFile": "off"
+      },
+      "nursery": "off"
+    }
+  }
 }

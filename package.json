@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "dev": "vite",
+    "dev": "vite -c ./playground/vite.config.ts",
     "test": "vitest",
     "clean": "rimraf dist node_modules pnpm-lock.yaml",
     "test:run": "vitest --run",
@@ -27,7 +27,8 @@
     "solid-js": "^1.9.7"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.1.2",
+    "@biomejs/biome": "2.2.0",
+    "@solidjs/router": "^0.15.3",
     "@solidjs/testing-library": "^0.8.10",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/user-event": "^14.6.1",
@@ -38,10 +39,11 @@
     "jsdom": "^26.1.0",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3",
-    "ultracite": "5.1.2",
+    "ultracite": "5.2.2",
     "unocss": "^66.3.3",
     "vite": "^6.2.1",
     "vite-plugin-solid": "^2.11.0",
+    "vite-plugin-solid-pages": "^0.3.4",
     "vitest": "^3.2.4"
   },
   "keywords": [

@@ -1,4 +1,5 @@
-import { isClient } from '~/lodash';
+import type { JSX } from 'solid-js/jsx-runtime';
+import { isClient } from '~/utils';
 
 const alreadyInjected: string[] = [];
 
@@ -32,4 +33,25 @@ export function mountStyle(style: string, id: string, refresh = false) {
   styleElement.innerHTML = style;
   document.head.appendChild(styleElement);
   alreadyInjected.push(id);
+}
+
+const extractCSSregex = /((?:--)?(?:\w+-?)+)\s*:\s*([^;]*)/g;
+export function stringStyleToObject(style: string): JSX.CSSProperties {
+  const object: Record<string, string> = {};
+  let match: RegExpExecArray | null = extractCSSregex.exec(style);
+  while (match) {
+    if (match[1] && match[2]) {
+      object[match[1]] = match[2];
+    }
+    match = extractCSSregex.exec(style);
+  }
+  return object;
+}
+
+export function combineStyle(
+  a: JSX.CSSProperties,
+  b: JSX.CSSProperties | string | undefined
+): JSX.CSSProperties | string {
+  const bb = typeof b === 'string' ? stringStyleToObject(b) : b;
+  return { ...a, ...bb };
 }
