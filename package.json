@@ -16,7 +16,7 @@
     "lint": "npx ultracite lint",
     "lint:fix": "npx ultracite format",
     "type-check": "tsc --noEmit --skipLibCheck",
-    "release": "pnpm type-check && pnpm lint:fix && pnpm test:run && commit-and-tag-version -i CHANGELOG.md --same-file",
+    "release": "pnpm type-check && pnpm lint:fix && pnpm test && commit-and-tag-version -i CHANGELOG.md --same-file",
     "pub": "pnpm build && pnpm publish",
     "prepare": "husky"
   },
