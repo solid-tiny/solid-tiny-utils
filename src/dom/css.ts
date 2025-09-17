@@ -1,5 +1,5 @@
-import type { JSX } from 'solid-js/jsx-runtime';
-import { isClient } from '~/utils';
+import type { JSX } from "solid-js/jsx-runtime";
+import { isClient } from "~/utils";
 
 const alreadyInjected: string[] = [];
 
@@ -28,7 +28,7 @@ export function mountStyle(style: string, id: string, refresh = false) {
     return;
   }
 
-  styleElement = document.createElement('style');
+  styleElement = document.createElement("style");
   styleElement.id = id;
   styleElement.innerHTML = style;
   document.head.appendChild(styleElement);
@@ -52,6 +52,10 @@ export function combineStyle(
   a: JSX.CSSProperties,
   b: JSX.CSSProperties | string | undefined
 ): JSX.CSSProperties | string {
-  const bb = typeof b === 'string' ? stringStyleToObject(b) : b;
+  const bb = typeof b === "string" ? stringStyleToObject(b) : b;
   return { ...a, ...bb };
+}
+
+export function combineClass(defaultClass: string, ...otherClass: string[]) {
+  return [defaultClass, ...otherClass].filter(Boolean).join(" ");
 }
