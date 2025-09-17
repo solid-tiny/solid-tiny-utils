@@ -6,7 +6,7 @@
  */
 export const capitalize = (str: string): string => {
   if (!str || str.length === 0) {
-    return '';
+    return "";
   }
   const lower = str.toLowerCase();
   return lower.substring(0, 1).toUpperCase() + lower.substring(1, lower.length);
@@ -27,7 +27,7 @@ export const camel = (str: string): string => {
       ?.split(splitRegexp)
       .map((x) => x.toLowerCase()) ?? [];
   if (parts.length === 0) {
-    return '';
+    return "";
   }
   if (parts.length === 1) {
     return parts[0];
@@ -59,7 +59,7 @@ export const snake = (
       .split(splitRegexp)
       .map((x) => x.toLowerCase()) ?? [];
   if (parts.length === 0) {
-    return '';
+    return "";
   }
   if (parts.length === 1) {
     return parts[0];
@@ -86,7 +86,7 @@ export const dash = (str: string): string => {
       ?.split(splitRegexp)
       .map((x) => x.toLowerCase()) ?? [];
   if (parts.length === 0) {
-    return '';
+    return "";
   }
   if (parts.length === 1) {
     return parts[0];
@@ -106,9 +106,9 @@ const pascalSplitRegexp = /[.\-\s_]/;
 export const pascal = (str: string): string => {
   const parts = str?.split(pascalSplitRegexp).map((x) => x.toLowerCase()) ?? [];
   if (parts.length === 0) {
-    return '';
+    return "";
   }
-  return parts.map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join('');
+  return parts.map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join("");
 };
 
 /**
@@ -121,14 +121,14 @@ export const pascal = (str: string): string => {
  */
 export const title = (str: string | null | undefined): string => {
   if (!str) {
-    return '';
+    return "";
   }
   return str
     .split(splitRegexp)
     .map((s) => s.trim())
     .filter((s) => !!s)
     .map((s) => capitalize(s.toLowerCase()))
-    .join(' ');
+    .join(" ");
 };
 
 /**
@@ -162,11 +162,11 @@ export const template = (
  * trim('222222__hello__1111111', '12_') // => 'hello'
  * ```
  */
-export const trim = (str: string | null | undefined, charsToTrim = ' ') => {
+export const trim = (str: string | null | undefined, charsToTrim = " ") => {
   if (!str) {
-    return '';
+    return "";
   }
-  const toTrim = charsToTrim.replace(/[\W]{1}/g, '\\$&');
-  const regex = new RegExp(`^[${toTrim}]+|[${toTrim}]+$`, 'g');
-  return str.replace(regex, '');
+  const toTrim = charsToTrim.replace(/[\W]{1}/g, "\\$&");
+  const regex = new RegExp(`^[${toTrim}]+|[${toTrim}]+$`, "g");
+  return str.replace(regex, "");
 };

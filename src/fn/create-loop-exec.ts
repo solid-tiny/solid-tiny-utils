@@ -1,7 +1,7 @@
-import { onCleanup } from 'solid-js';
-import { access, createWatch } from '~/reactive';
-import type { MaybeAccessor, MaybePromise } from '~/types/maybe';
-import { isNumber } from '~/utils';
+import { onCleanup } from "solid-js";
+import { access, createWatch } from "~/reactive";
+import type { MaybeAccessor, MaybePromise } from "~/types/maybe";
+import { isNumber } from "~/utils";
 
 /**
  * Repeatedly executes an asynchronous function with a specified delay between each execution.

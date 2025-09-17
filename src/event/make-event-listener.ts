@@ -1,8 +1,8 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: I need any */
-import { onCleanup } from 'solid-js';
-import { noop } from '~/fn';
-import type { Fn, MaybeArray } from '~/types';
-import { clearArray, isArray } from '~/utils';
+import { onCleanup } from "solid-js";
+import { noop } from "~/fn";
+import type { Fn, MaybeArray } from "~/types";
+import { clearArray, isArray } from "~/utils";
 
 interface InferEventTarget<Events> {
   addEventListener: (event: Events, fn?: any, options?: any) => any;
@@ -106,7 +106,7 @@ export function makeEventListener(...args: any[]): Fn {
   let listeners: Fn[];
   let options: AddEventListenerOptions | undefined | boolean;
 
-  if (typeof args[0] === 'string' || isArray(args[0])) {
+  if (typeof args[0] === "string" || isArray(args[0])) {
     // @ts-expect-error should ignore
     [events, listeners, options] = args;
     target = window;

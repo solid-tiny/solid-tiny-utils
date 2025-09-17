@@ -1,8 +1,8 @@
-import { createRoot, createSignal } from 'solid-js';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createDebouncedWatch } from '~/reactive';
+import { createRoot, createSignal } from "solid-js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { createDebouncedWatch } from "~/reactive";
 
-describe('createDebouncedWatch', () => {
+describe("createDebouncedWatch", () => {
   beforeEach(() => {
     vi.useFakeTimers();
   });
@@ -11,8 +11,8 @@ describe('createDebouncedWatch', () => {
     vi.useRealTimers();
   });
 
-  it('should watch a single signal and execute callback on changes', async () => {
-    const callback = vi.fn(() => 'return');
+  it("should watch a single signal and execute callback on changes", async () => {
+    const callback = vi.fn(() => "return");
 
     const setCount = createRoot(() => {
       const [count, s] = createSignal(0);
@@ -34,8 +34,8 @@ describe('createDebouncedWatch', () => {
     expect(callback).toHaveBeenLastCalledWith(1, 0, undefined);
   });
 
-  it('should work with custom delay', async () => {
-    const callback = vi.fn(() => 'return');
+  it("should work with custom delay", async () => {
+    const callback = vi.fn(() => "return");
 
     const setCount = createRoot(() => {
       const [count, s] = createSignal(0);

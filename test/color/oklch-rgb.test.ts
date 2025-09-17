@@ -1,9 +1,9 @@
 // tests/oklch-rgb.spec.ts
 
-import { rgb as culoriRgb, oklch } from 'culori';
-import { describe, expect, it } from 'vitest';
-import { isValidOKLCH, isValidRGB, oklchToRgb, rgbToOklch } from '~/color';
-import { clamp } from '~/utils';
+import { rgb as culoriRgb, oklch } from "culori";
+import { describe, expect, it } from "vitest";
+import { isValidOKLCH, isValidRGB, oklchToRgb, rgbToOklch } from "~/color";
+import { clamp } from "~/utils";
 
 // ---------- Helper: convert culori RGB (0-1) to 0-255 ----------
 function culoriRgbTo255(c: Exclude<ReturnType<typeof culoriRgb>, undefined>) {
@@ -26,7 +26,7 @@ const testColors = [
   { l: 0.4, c: 0.0, h: 120 },
 ];
 
-describe('OKLCH ↔ RGB implementation matches culori', () => {
+describe("OKLCH ↔ RGB implementation matches culori", () => {
   for (const color of testColors) {
     it(`OKLCH(${color.l}, ${color.c}, ${color.h}) → RGB`, () => {
       // Convert using our implementation
@@ -35,7 +35,7 @@ describe('OKLCH ↔ RGB implementation matches culori', () => {
       // Convert using culori
       const cColor = oklch({
         ...color,
-        mode: 'oklch',
+        mode: "oklch",
       });
       const cRgb255 = culoriRgbTo255(culoriRgb(cColor));
 
@@ -53,7 +53,7 @@ describe('OKLCH ↔ RGB implementation matches culori', () => {
       // Convert using culori for comparison
       const culoriBack = oklch(
         culoriRgb({
-          mode: 'rgb',
+          mode: "rgb",
           r: rgbVal.r / 255,
           g: rgbVal.g / 255,
           b: rgbVal.b / 255,
@@ -76,8 +76,8 @@ describe('OKLCH ↔ RGB implementation matches culori', () => {
   }
 });
 
-describe('Input validation and edge cases', () => {
-  it('should handle out-of-range OKLCH values gracefully', () => {
+describe("Input validation and edge cases", () => {
+  it("should handle out-of-range OKLCH values gracefully", () => {
     // Test negative lightness
     const result1 = oklchToRgb({ l: -0.1, c: 0.1, h: 100 });
     expect(isValidRGB(result1)).toBe(true);
@@ -100,7 +100,7 @@ describe('Input validation and edge cases', () => {
     expect(result6).toEqual(result7);
   });
 
-  it('should handle out-of-range RGB values gracefully', () => {
+  it("should handle out-of-range RGB values gracefully", () => {
     // Test negative RGB values
     const result1 = rgbToOklch({ r: -10, g: 50, b: 100 });
     expect(isValidOKLCH(result1)).toBe(true);

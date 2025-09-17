@@ -1,7 +1,7 @@
-import { type Accessor, createSignal, onCleanup } from 'solid-js';
-import { access, createWatch } from '~/reactive';
-import type { MaybeNullableAccessor } from '~/types';
-import { isObject } from '~/utils';
+import { type Accessor, createSignal, onCleanup } from "solid-js";
+import { access, createWatch } from "~/reactive";
+import type { MaybeNullableAccessor } from "~/types";
+import { isObject } from "~/utils";
 
 export type UseVisibilityObserverFn = (
   target: MaybeNullableAccessor<HTMLElement>

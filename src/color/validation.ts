@@ -1,6 +1,6 @@
-import { inRange } from '~/utils';
-import { hexToRgb } from './hex-rgb';
-import type { OKLCH, RGB } from './oklch-rgb';
+import { inRange } from "~/utils";
+import { hexToRgb } from "./hex-rgb";
+import type { OKLCH, RGB } from "./oklch-rgb";
 
 /**
  * Checks if RGB values are in valid range (0-255)

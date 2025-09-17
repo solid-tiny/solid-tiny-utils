@@ -1,14 +1,14 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: I need any */
-import { noop } from '~/fn';
-import { access, createWatch } from '~/reactive';
-import type { Fn, MaybeAccessor, MaybeArray } from '~/types';
-import { clearArray, isArray } from '~/utils';
+import { noop } from "~/fn";
+import { access, createWatch } from "~/reactive";
+import type { Fn, MaybeAccessor, MaybeArray } from "~/types";
+import { clearArray, isArray } from "~/utils";
 import {
   type DocumentEventName,
   type GeneralEventListener,
   makeEventListener,
   type WindowEventName,
-} from './make-event-listener';
+} from "./make-event-listener";
 
 /**
  * Overload 2: Explicitly Window target

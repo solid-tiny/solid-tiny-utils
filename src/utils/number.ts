@@ -107,10 +107,10 @@ export function inRange(
   x: number,
   minimum = 0,
   maximum = 1,
-  inclusivity: '()' | '[]' | '[)' | '(]' = '[]'
+  inclusivity: "()" | "[]" | "[)" | "(]" = "[]"
 ) {
-  const minCheck = inclusivity[0] === '[' ? x >= minimum : x > minimum;
-  const maxCheck = inclusivity[1] === ']' ? x <= maximum : x < maximum;
+  const minCheck = inclusivity[0] === "[" ? x >= minimum : x > minimum;
+  const maxCheck = inclusivity[1] === "]" ? x <= maximum : x < maximum;
   return minCheck && maxCheck;
 }
 
@@ -128,5 +128,5 @@ export function inRange(
  * ```
  */
 export function toHex(x: number, pad = 2): string {
-  return x.toString(16).padStart(pad, '0');
+  return x.toString(16).padStart(pad, "0");
 }

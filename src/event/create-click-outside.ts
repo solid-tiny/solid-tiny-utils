@@ -1,6 +1,6 @@
-import { access } from '~/reactive';
-import type { MaybeAccessor } from '~/types';
-import { makeEventListener } from './make-event-listener';
+import { access } from "~/reactive";
+import type { MaybeAccessor } from "~/types";
+import { makeEventListener } from "./make-event-listener";
 
 export function createClickOutside(
   target: MaybeAccessor<HTMLElement | null | undefined>,
@@ -36,9 +36,9 @@ export function createClickOutside(
   };
 
   const cleanups = [
-    makeEventListener('click', listener, { passive: true }),
+    makeEventListener("click", listener, { passive: true }),
     makeEventListener(
-      'pointerdown',
+      "pointerdown",
       (e) => {
         const el = access(target);
         if (el) {

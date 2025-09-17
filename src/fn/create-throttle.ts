@@ -1,6 +1,6 @@
-import { onCleanup } from 'solid-js';
-import { access } from '~/reactive';
-import type { MaybeAccessor } from '~/types';
+import { onCleanup } from "solid-js";
+import { access } from "~/reactive";
+import type { MaybeAccessor } from "~/types";
 
 export function createThrottle<Args extends unknown[]>(
   callback: (...args: Args) => void,

@@ -1,5 +1,5 @@
-import { createSignal, onMount } from 'solid-js';
-import { createClickOutside } from '~/index';
+import { createSignal, onMount } from "solid-js";
+import { createClickOutside } from "~/index";
 
 export default function Index() {
   const [count, setCount] = createSignal(0);

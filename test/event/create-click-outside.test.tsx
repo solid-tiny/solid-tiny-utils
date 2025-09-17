@@ -1,8 +1,8 @@
-import { render } from '@solidjs/testing-library';
-import userEvent from '@testing-library/user-event';
-import { createSignal } from 'solid-js';
-import { describe, expect, it } from 'vitest';
-import { createClickOutside } from '~/event';
+import { render } from "@solidjs/testing-library";
+import userEvent from "@testing-library/user-event";
+import { createSignal } from "solid-js";
+import { describe, expect, it } from "vitest";
+import { createClickOutside } from "~/event";
 
 const TestComponent = () => {
   const [refTrigger, setRefTrigger] = createSignal<HTMLDivElement | null>(null);
@@ -32,31 +32,31 @@ const TestComponent = () => {
   );
 };
 const user = userEvent.setup();
-describe('createClickOutside', () => {
-  it('basic usage', async () => {
+describe("createClickOutside", () => {
+  it("basic usage", async () => {
     const { getByTestId } = render(() => <TestComponent />);
-    const inside = getByTestId('inside');
-    const insideInner = getByTestId('inside-inner');
-    const ignore = getByTestId('ignore');
-    const outside = getByTestId('outside');
-    expect(insideInner).toHaveTextContent('0');
+    const inside = getByTestId("inside");
+    const insideInner = getByTestId("inside-inner");
+    const ignore = getByTestId("ignore");
+    const outside = getByTestId("outside");
+    expect(insideInner).toHaveTextContent("0");
     await user.click(inside);
     await user.click(insideInner);
     await user.click(ignore);
-    expect(insideInner).toHaveTextContent('0');
+    expect(insideInner).toHaveTextContent("0");
     await user.click(outside);
-    expect(insideInner).toHaveTextContent('1');
+    expect(insideInner).toHaveTextContent("1");
 
-    await user.pointer([{ keys: '[MouseLeft]>', target: inside }]);
-    await user.pointer([{ keys: '[/MouseLeft]', target: inside }]);
-    expect(insideInner).toHaveTextContent('1');
+    await user.pointer([{ keys: "[MouseLeft]>", target: inside }]);
+    await user.pointer([{ keys: "[/MouseLeft]", target: inside }]);
+    expect(insideInner).toHaveTextContent("1");
 
-    await user.pointer([{ keys: '[MouseLeft]>', target: outside }]);
-    await user.pointer([{ keys: '[/MouseLeft]', target: inside }]);
-    expect(insideInner).toHaveTextContent('2');
+    await user.pointer([{ keys: "[MouseLeft]>", target: outside }]);
+    await user.pointer([{ keys: "[/MouseLeft]", target: inside }]);
+    expect(insideInner).toHaveTextContent("2");
 
-    await user.pointer([{ keys: '[MouseLeft]>', target: inside }]);
-    await user.pointer([{ keys: '[/MouseLeft]', target: outside }]);
-    expect(insideInner).toHaveTextContent('2');
+    await user.pointer([{ keys: "[MouseLeft]>", target: inside }]);
+    await user.pointer([{ keys: "[/MouseLeft]", target: outside }]);
+    expect(insideInner).toHaveTextContent("2");
   });
 });

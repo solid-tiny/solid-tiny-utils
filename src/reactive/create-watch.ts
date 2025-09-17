@@ -3,8 +3,8 @@ import type {
   AccessorArray,
   OnEffectFunction,
   OnOptions,
-} from 'solid-js';
-import { createEffect, on } from 'solid-js';
+} from "solid-js";
+import { createEffect, on } from "solid-js";
 
 export function createWatch<S, Next extends Prev, Prev = Next>(
   targets: AccessorArray<S> | Accessor<S>,

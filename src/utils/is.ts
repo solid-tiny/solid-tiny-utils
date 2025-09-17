@@ -1,5 +1,5 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: need any */
-import { isServer } from 'solid-js/web';
+import { isServer } from "solid-js/web";
 
 export const isSymbol = (value: any): value is symbol => {
   return !!value && value.constructor === Symbol;
@@ -23,7 +23,7 @@ export const isPrimitive = (value: any): boolean => {
   return (
     value === undefined ||
     value === null ||
-    (typeof value !== 'object' && typeof value !== 'function')
+    (typeof value !== "object" && typeof value !== "function")
   );
 };
 
@@ -34,7 +34,7 @@ export const isFn = (value: any): value is Function => {
 };
 
 export const isString = (value: any): value is string => {
-  return typeof value === 'string' || value instanceof String;
+  return typeof value === "string" || value instanceof String;
 };
 
 export const isInt = (value: any): value is number => {
@@ -54,7 +54,7 @@ export const isNumber = (value: any): value is number => {
 };
 
 export const isDate = (value: any): value is Date => {
-  return Object.prototype.toString.call(value) === '[object Date]';
+  return Object.prototype.toString.call(value) === "[object Date]";
 };
 
 /**

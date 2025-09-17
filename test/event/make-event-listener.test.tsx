@@ -1,8 +1,8 @@
-import { render } from '@solidjs/testing-library';
-import userEvent from '@testing-library/user-event';
-import { createSignal, onMount } from 'solid-js';
-import { describe, expect, it } from 'vitest';
-import { makeEventListener } from '~/event';
+import { render } from "@solidjs/testing-library";
+import userEvent from "@testing-library/user-event";
+import { createSignal, onMount } from "solid-js";
+import { describe, expect, it } from "vitest";
+import { makeEventListener } from "~/event";
 
 const TestComponent = () => {
   let refTrigger!: HTMLDivElement;
@@ -10,11 +10,11 @@ const TestComponent = () => {
   const [globalCount, setGlobalCount] = createSignal(0);
 
   onMount(() => {
-    makeEventListener(refTrigger, 'click', () => {
+    makeEventListener(refTrigger, "click", () => {
       setCount(count() + 1);
     });
 
-    makeEventListener('click', () => {
+    makeEventListener("click", () => {
       setGlobalCount(globalCount() + 1);
     });
   });
@@ -29,22 +29,22 @@ const TestComponent = () => {
   );
 };
 const user = userEvent.setup();
-describe('make-event-listener', () => {
-  it('basic usage', async () => {
+describe("make-event-listener", () => {
+  it("basic usage", async () => {
     const { getByTestId } = render(() => <TestComponent />);
-    const clickMe = getByTestId('click-me');
-    const insideInner = getByTestId('inside-inner');
-    const globalCount = getByTestId('global-count');
-    expect(insideInner).toHaveTextContent('0');
-    expect(globalCount).toHaveTextContent('0');
+    const clickMe = getByTestId("click-me");
+    const insideInner = getByTestId("inside-inner");
+    const globalCount = getByTestId("global-count");
+    expect(insideInner).toHaveTextContent("0");
+    expect(globalCount).toHaveTextContent("0");
     await user.click(clickMe);
-    expect(insideInner).toHaveTextContent('1');
-    expect(globalCount).toHaveTextContent('1');
+    expect(insideInner).toHaveTextContent("1");
+    expect(globalCount).toHaveTextContent("1");
     await user.click(insideInner);
-    expect(insideInner).toHaveTextContent('2');
-    expect(globalCount).toHaveTextContent('2');
+    expect(insideInner).toHaveTextContent("2");
+    expect(globalCount).toHaveTextContent("2");
     await user.click(globalCount);
-    expect(insideInner).toHaveTextContent('2');
-    expect(globalCount).toHaveTextContent('3');
+    expect(insideInner).toHaveTextContent("2");
+    expect(globalCount).toHaveTextContent("3");
   });
 });

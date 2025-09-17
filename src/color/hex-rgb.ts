@@ -1,5 +1,5 @@
-import { clamp, isArray, toHex } from '~/utils';
-import type { RGB } from './oklch-rgb';
+import { clamp, isArray, toHex } from "~/utils";
+import type { RGB } from "./oklch-rgb";
 
 // Pre-compiled regex patterns for performance
 const HEX_PREFIX_REGEX = /^#/;
@@ -22,19 +22,19 @@ const HEX_VALIDATION_REGEX = /^[0-9a-fA-F]{6}$/;
  * ```
  */
 export function hexToRgb(hex: string): RGB | null {
-  if (!hex || typeof hex !== 'string') {
+  if (!hex || typeof hex !== "string") {
     return null;
   }
 
   // Clean and normalize the hex string
-  let value = hex.trim().replace(HEX_PREFIX_REGEX, '');
+  let value = hex.trim().replace(HEX_PREFIX_REGEX, "");
 
   // Handle 3-digit hex (e.g., "f0c" -> "ff00cc")
   if (value.length === 3) {
     value = value
-      .split('')
+      .split("")
       .map((c) => c + c)
-      .join('');
+      .join("");
   }
 
   // Validate hex format

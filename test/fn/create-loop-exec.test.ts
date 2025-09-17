@@ -1,9 +1,9 @@
-import { createRoot, createSignal } from 'solid-js';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createLoopExec } from '~/fn';
-import { ignoreRejections } from '../common';
+import { createRoot, createSignal } from "solid-js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { createLoopExec } from "~/fn";
+import { ignoreRejections } from "../common";
 
-describe('createLoopExec', () => {
+describe("createLoopExec", () => {
   beforeEach(() => {
     vi.useFakeTimers();
   });
@@ -13,7 +13,7 @@ describe('createLoopExec', () => {
     vi.useRealTimers();
   });
 
-  it('should execute function repeatedly with static delay', async () => {
+  it("should execute function repeatedly with static delay", async () => {
     const mockFn = vi.fn();
     const delay = 100;
 
@@ -32,7 +32,7 @@ describe('createLoopExec', () => {
     expect(mockFn).toHaveBeenCalledTimes(3);
   });
 
-  it('should work with reactive delay', async () => {
+  it("should work with reactive delay", async () => {
     const mockFn = vi.fn();
 
     const setDelay = createRoot(() => {
@@ -68,7 +68,7 @@ describe('createLoopExec', () => {
     expect(mockFn).toHaveBeenCalledTimes(5); // Should not be called again with negative delay
   });
 
-  it('should handle async functions', async () => {
+  it("should handle async functions", async () => {
     const mockAsyncFn = vi.fn().mockResolvedValue(undefined);
     const delay = 100;
 
@@ -84,11 +84,11 @@ describe('createLoopExec', () => {
     expect(mockAsyncFn).toHaveBeenCalledTimes(2);
   });
 
-  it('should handle async functions that throw errors', async ({
+  it("should handle async functions that throw errors", async ({
     onTestFinished,
   }) => {
     ignoreRejections(onTestFinished);
-    const error = new Error('Test error');
+    const error = new Error("Test error");
     const mockAsyncFn = vi.fn().mockRejectedValue(error);
     const delay = 100;
 
@@ -104,7 +104,7 @@ describe('createLoopExec', () => {
     expect(mockAsyncFn).toHaveBeenCalledTimes(2);
   });
 
-  it('should stop execution when component is disposed', async () => {
+  it("should stop execution when component is disposed", async () => {
     const mockFn = vi.fn();
     const delay = 100;
 
@@ -123,10 +123,10 @@ describe('createLoopExec', () => {
     expect(mockFn).toHaveBeenCalledTimes(1);
   });
 
-  it('should clear existing timers when new execution is scheduled', async () => {
+  it("should clear existing timers when new execution is scheduled", async () => {
     const mockFn = vi.fn();
     const delay = 100;
-    const clearTimeoutSpy = vi.spyOn(global, 'clearTimeout');
+    const clearTimeoutSpy = vi.spyOn(global, "clearTimeout");
 
     createRoot(() => {
       createLoopExec(mockFn, delay);
@@ -143,7 +143,7 @@ describe('createLoopExec', () => {
     expect(clearTimeoutSpy).toHaveBeenCalled();
   });
 
-  it('should work with zero delay', async () => {
+  it("should work with zero delay", async () => {
     const mockFn = vi.fn();
     const delay = 0;
 
@@ -159,7 +159,7 @@ describe('createLoopExec', () => {
     expect(mockFn).toHaveBeenCalledTimes(2);
   });
 
-  it('should not execute if delay is negative or false', async () => {
+  it("should not execute if delay is negative or false", async () => {
     const mockFn = vi.fn();
     const delay = -100;
 
@@ -181,7 +181,7 @@ describe('createLoopExec', () => {
     expect(mockFalseFn).toHaveBeenCalledTimes(0);
   });
 
-  it('should able to stop and start manually', async () => {
+  it("should able to stop and start manually", async () => {
     const mockFn = vi.fn();
     const delay = 100;
 

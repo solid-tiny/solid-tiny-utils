@@ -1,4 +1,4 @@
-import { clamp, max } from '~/utils';
+import { clamp, max } from "~/utils";
 
 export interface RGB {
   r: number;

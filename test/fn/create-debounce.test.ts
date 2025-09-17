@@ -1,8 +1,8 @@
-import { createRoot, createSignal } from 'solid-js';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createDebounce } from '~/fn';
+import { createRoot, createSignal } from "solid-js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { createDebounce } from "~/fn";
 
-describe('createDebounce', () => {
+describe("createDebounce", () => {
   beforeEach(() => {
     vi.useFakeTimers();
   });
@@ -12,7 +12,7 @@ describe('createDebounce', () => {
     vi.useRealTimers();
   });
 
-  it('should delay function execution with static delay', async () => {
+  it("should delay function execution with static delay", async () => {
     const mockFn = vi.fn();
     const delay = 100;
 
@@ -21,7 +21,7 @@ describe('createDebounce', () => {
     });
 
     // Call the debounced function
-    debouncedFn('test');
+    debouncedFn("test");
 
     // Function should not be called immediately
     expect(mockFn).not.toHaveBeenCalled();
@@ -33,10 +33,10 @@ describe('createDebounce', () => {
     // Advance timers to complete the delay
     await vi.advanceTimersByTimeAsync(50);
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('test');
+    expect(mockFn).toHaveBeenCalledWith("test");
   });
 
-  it('should cancel previous execution if called again before delay', async () => {
+  it("should cancel previous execution if called again before delay", async () => {
     const mockFn = vi.fn();
     const delay = 100;
 
@@ -45,11 +45,11 @@ describe('createDebounce', () => {
     });
 
     // First call
-    debouncedFn('first');
+    debouncedFn("first");
     await vi.advanceTimersByTimeAsync(50);
 
     // Second call before first completes
-    debouncedFn('second');
+    debouncedFn("second");
     await vi.advanceTimersByTimeAsync(50);
 
     // Only the second call should execute
@@ -57,10 +57,10 @@ describe('createDebounce', () => {
 
     await vi.advanceTimersByTimeAsync(50);
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('second');
+    expect(mockFn).toHaveBeenCalledWith("second");
   });
 
-  it('should work with reactive delay', async () => {
+  it("should work with reactive delay", async () => {
     const mockFn = vi.fn();
 
     const { debouncedFn, setDelay } = createRoot(() => {
@@ -70,14 +70,14 @@ describe('createDebounce', () => {
     });
 
     // Call with initial delay
-    debouncedFn('test1');
+    debouncedFn("test1");
     await vi.advanceTimersByTimeAsync(100);
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('test1');
+    expect(mockFn).toHaveBeenCalledWith("test1");
 
     // Change delay and call again
     setDelay(200);
-    debouncedFn('test2');
+    debouncedFn("test2");
 
     // Should not execute with old delay
     await vi.advanceTimersByTimeAsync(100);
@@ -86,10 +86,10 @@ describe('createDebounce', () => {
     // Should execute with new delay
     await vi.advanceTimersByTimeAsync(100);
     expect(mockFn).toHaveBeenCalledTimes(2);
-    expect(mockFn).toHaveBeenCalledWith('test2');
+    expect(mockFn).toHaveBeenCalledWith("test2");
   });
 
-  it('should handle multiple arguments', async () => {
+  it("should handle multiple arguments", async () => {
     const mockFn = vi.fn();
     const delay = 100;
 
@@ -97,14 +97,14 @@ describe('createDebounce', () => {
       return createDebounce(mockFn, delay);
     });
 
-    debouncedFn('arg1', 'arg2', 'arg3');
+    debouncedFn("arg1", "arg2", "arg3");
     await vi.advanceTimersByTimeAsync(delay);
 
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('arg1', 'arg2', 'arg3');
+    expect(mockFn).toHaveBeenCalledWith("arg1", "arg2", "arg3");
   });
 
-  it('should handle zero delay', async () => {
+  it("should handle zero delay", async () => {
     const mockFn = vi.fn();
     const delay = 0;
 
@@ -112,22 +112,22 @@ describe('createDebounce', () => {
       return createDebounce(mockFn, delay);
     });
 
-    debouncedFn('test');
+    debouncedFn("test");
 
     // With zero delay, should execute on next tick
     await vi.advanceTimersByTimeAsync(0);
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('test');
+    expect(mockFn).toHaveBeenCalledWith("test");
   });
 
-  it('should clear timeout when component is disposed', async () => {
+  it("should clear timeout when component is disposed", async () => {
     const mockFn = vi.fn();
     const delay = 100;
-    const clearTimeoutSpy = vi.spyOn(global, 'clearTimeout');
+    const clearTimeoutSpy = vi.spyOn(global, "clearTimeout");
 
     const dispose = createRoot((d) => {
       const debouncedFn = createDebounce(mockFn, delay);
-      debouncedFn('test');
+      debouncedFn("test");
       return d;
     });
 
@@ -143,7 +143,7 @@ describe('createDebounce', () => {
     expect(mockFn).not.toHaveBeenCalled();
   });
 
-  it('should handle rapid successive calls', async () => {
+  it("should handle rapid successive calls", async () => {
     const mockFn = vi.fn();
     const delay = 100;
 
@@ -152,11 +152,11 @@ describe('createDebounce', () => {
     });
 
     // Make multiple rapid calls
-    debouncedFn('call1');
-    debouncedFn('call2');
-    debouncedFn('call3');
-    debouncedFn('call4');
-    debouncedFn('call5');
+    debouncedFn("call1");
+    debouncedFn("call2");
+    debouncedFn("call3");
+    debouncedFn("call4");
+    debouncedFn("call5");
 
     // None should execute yet
     await vi.advanceTimersByTimeAsync(50);
@@ -165,10 +165,10 @@ describe('createDebounce', () => {
     // Only the last call should execute
     await vi.advanceTimersByTimeAsync(50);
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('call5');
+    expect(mockFn).toHaveBeenCalledWith("call5");
   });
 
-  it('should allow execution after delay completes', async () => {
+  it("should allow execution after delay completes", async () => {
     const mockFn = vi.fn();
     const delay = 100;
 
@@ -177,19 +177,19 @@ describe('createDebounce', () => {
     });
 
     // First execution
-    debouncedFn('first');
+    debouncedFn("first");
     await vi.advanceTimersByTimeAsync(delay);
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('first');
+    expect(mockFn).toHaveBeenCalledWith("first");
 
     // Second execution after delay
-    debouncedFn('second');
+    debouncedFn("second");
     await vi.advanceTimersByTimeAsync(delay);
     expect(mockFn).toHaveBeenCalledTimes(2);
-    expect(mockFn).toHaveBeenCalledWith('second');
+    expect(mockFn).toHaveBeenCalledWith("second");
   });
 
-  it('should preserve function context and type safety', async () => {
+  it("should preserve function context and type safety", async () => {
     const mockFn = vi.fn((a: string, b: number) => `${a}-${b}`);
     const delay = 100;
 
@@ -198,25 +198,25 @@ describe('createDebounce', () => {
     });
 
     // TypeScript should enforce correct argument types
-    debouncedFn('test', 42);
+    debouncedFn("test", 42);
     await vi.advanceTimersByTimeAsync(delay);
 
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('test', 42);
+    expect(mockFn).toHaveBeenCalledWith("test", 42);
   });
 
-  it('should work with async functions', async () => {
-    const mockAsyncFn = vi.fn().mockResolvedValue('result');
+  it("should work with async functions", async () => {
+    const mockAsyncFn = vi.fn().mockResolvedValue("result");
     const delay = 100;
 
     const debouncedFn = createRoot(() => {
       return createDebounce(mockAsyncFn, delay);
     });
 
-    debouncedFn('test');
+    debouncedFn("test");
     await vi.advanceTimersByTimeAsync(delay);
 
     expect(mockAsyncFn).toHaveBeenCalledTimes(1);
-    expect(mockAsyncFn).toHaveBeenCalledWith('test');
+    expect(mockAsyncFn).toHaveBeenCalledWith("test");
   });
 });

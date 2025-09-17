@@ -1,6 +1,6 @@
-import type { Accessor, AccessorArray, OnOptions } from 'solid-js';
-import { createDebounce } from '~/fn';
-import { createWatch } from './create-watch';
+import type { Accessor, AccessorArray, OnOptions } from "solid-js";
+import { createDebounce } from "~/fn";
+import { createWatch } from "./create-watch";
 
 /**
  * Creates a debounced watch effect.

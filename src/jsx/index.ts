@@ -1,1 +1,1 @@
-export * from './attrs';
+export * from "./attrs";

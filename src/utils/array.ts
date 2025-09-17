@@ -1,4 +1,4 @@
-import { isFn } from './is';
+import { isFn } from "./is";
 
 /**
  * Like a reduce but does not require an array.

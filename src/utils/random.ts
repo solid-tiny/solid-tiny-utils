@@ -1,4 +1,4 @@
-import { iterate } from './array';
+import { iterate } from "./array";
 
 /**
  * Generates a random number between min and max
@@ -27,13 +27,13 @@ export const shuffle = <T>(array: readonly T[]): T[] => {
     .map((a) => a.value);
 };
 
-export const uid = (length: number, specials = '') => {
+export const uid = (length: number, specials = "") => {
   const characters = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789${specials}`;
   return iterate(
     length,
     (acc) => {
       return acc + characters.charAt(random(0, characters.length - 1));
     },
-    ''
+    ""
   );
 };

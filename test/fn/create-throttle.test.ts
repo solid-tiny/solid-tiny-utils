@@ -1,8 +1,8 @@
-import { createRoot, createSignal } from 'solid-js';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createThrottle } from '~/fn';
+import { createRoot, createSignal } from "solid-js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { createThrottle } from "~/fn";
 
-describe('createThrottle', () => {
+describe("createThrottle", () => {
   beforeEach(() => {
     vi.useFakeTimers();
   });
@@ -12,7 +12,7 @@ describe('createThrottle', () => {
     vi.useRealTimers();
   });
 
-  it('should delay function execution with static delay', async () => {
+  it("should delay function execution with static delay", async () => {
     const mockFn = vi.fn();
     const delay = 100;
 
@@ -21,7 +21,7 @@ describe('createThrottle', () => {
     });
 
     // Call the throttled function
-    throttledFn('test');
+    throttledFn("test");
 
     // Function should not be called immediately
     expect(mockFn).not.toHaveBeenCalled();
@@ -33,10 +33,10 @@ describe('createThrottle', () => {
     // Advance timers to complete the delay
     await vi.advanceTimersByTimeAsync(50);
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('test');
+    expect(mockFn).toHaveBeenCalledWith("test");
   });
 
-  it('should cancel previous execution if called again before delay', async () => {
+  it("should cancel previous execution if called again before delay", async () => {
     const mockFn = vi.fn();
     const delay = 100;
 
@@ -45,17 +45,17 @@ describe('createThrottle', () => {
     });
 
     // First call
-    throttledFn('first');
+    throttledFn("first");
     await vi.advanceTimersByTimeAsync(50);
     // Second call before first completes
-    throttledFn('second');
+    throttledFn("second");
     expect(mockFn).not.toHaveBeenCalled();
     await vi.advanceTimersByTimeAsync(50);
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('first');
+    expect(mockFn).toHaveBeenCalledWith("first");
   });
 
-  it('should work with reactive delay', async () => {
+  it("should work with reactive delay", async () => {
     const mockFn = vi.fn();
 
     const { throttledFn, setDelay } = createRoot(() => {
@@ -65,14 +65,14 @@ describe('createThrottle', () => {
     });
 
     // Call with initial delay
-    throttledFn('test1');
+    throttledFn("test1");
     await vi.advanceTimersByTimeAsync(100);
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('test1');
+    expect(mockFn).toHaveBeenCalledWith("test1");
 
     // Change delay and call again
     setDelay(200);
-    throttledFn('test2');
+    throttledFn("test2");
 
     // Should not execute with old delay
     await vi.advanceTimersByTimeAsync(100);
@@ -81,10 +81,10 @@ describe('createThrottle', () => {
     // Should execute with new delay
     await vi.advanceTimersByTimeAsync(100);
     expect(mockFn).toHaveBeenCalledTimes(2);
-    expect(mockFn).toHaveBeenCalledWith('test2');
+    expect(mockFn).toHaveBeenCalledWith("test2");
   });
 
-  it('should handle multiple arguments', async () => {
+  it("should handle multiple arguments", async () => {
     const mockFn = vi.fn();
     const delay = 100;
 
@@ -92,14 +92,14 @@ describe('createThrottle', () => {
       return createThrottle(mockFn, delay);
     });
 
-    throttledFn('arg1', 'arg2', 'arg3');
+    throttledFn("arg1", "arg2", "arg3");
     await vi.advanceTimersByTimeAsync(delay);
 
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('arg1', 'arg2', 'arg3');
+    expect(mockFn).toHaveBeenCalledWith("arg1", "arg2", "arg3");
   });
 
-  it('should handle zero delay', async () => {
+  it("should handle zero delay", async () => {
     const mockFn = vi.fn();
     const delay = 0;
 
@@ -107,22 +107,22 @@ describe('createThrottle', () => {
       return createThrottle(mockFn, delay);
     });
 
-    throttledFn('test');
+    throttledFn("test");
 
     // With zero delay, should execute on next tick
     await vi.advanceTimersByTimeAsync(0);
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('test');
+    expect(mockFn).toHaveBeenCalledWith("test");
   });
 
-  it('should clear timeout when component is disposed', async () => {
+  it("should clear timeout when component is disposed", async () => {
     const mockFn = vi.fn();
     const delay = 100;
-    const clearTimeoutSpy = vi.spyOn(global, 'clearTimeout');
+    const clearTimeoutSpy = vi.spyOn(global, "clearTimeout");
 
     const dispose = createRoot((d) => {
       const throttledFn = createThrottle(mockFn, delay);
-      throttledFn('test');
+      throttledFn("test");
       return d;
     });
 
@@ -138,7 +138,7 @@ describe('createThrottle', () => {
     expect(mockFn).not.toHaveBeenCalled();
   });
 
-  it('should handle rapid successive calls', async () => {
+  it("should handle rapid successive calls", async () => {
     const mockFn = vi.fn();
     const delay = 100;
 
@@ -147,11 +147,11 @@ describe('createThrottle', () => {
     });
 
     // Make multiple rapid calls
-    throttledFn('call1');
-    throttledFn('call2');
-    throttledFn('call3');
-    throttledFn('call4');
-    throttledFn('call5');
+    throttledFn("call1");
+    throttledFn("call2");
+    throttledFn("call3");
+    throttledFn("call4");
+    throttledFn("call5");
 
     // None should execute yet
     await vi.advanceTimersByTimeAsync(50);
@@ -160,10 +160,10 @@ describe('createThrottle', () => {
     // Only the last call should execute
     await vi.advanceTimersByTimeAsync(50);
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('call1');
+    expect(mockFn).toHaveBeenCalledWith("call1");
   });
 
-  it('should allow execution after delay completes', async () => {
+  it("should allow execution after delay completes", async () => {
     const mockFn = vi.fn();
     const delay = 100;
 
@@ -172,19 +172,19 @@ describe('createThrottle', () => {
     });
 
     // First execution
-    throttledFn('first');
+    throttledFn("first");
     await vi.advanceTimersByTimeAsync(delay);
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('first');
+    expect(mockFn).toHaveBeenCalledWith("first");
 
     // Second execution after delay
-    throttledFn('second');
+    throttledFn("second");
     await vi.advanceTimersByTimeAsync(delay);
     expect(mockFn).toHaveBeenCalledTimes(2);
-    expect(mockFn).toHaveBeenCalledWith('second');
+    expect(mockFn).toHaveBeenCalledWith("second");
   });
 
-  it('should preserve function context and type safety', async () => {
+  it("should preserve function context and type safety", async () => {
     const mockFn = vi.fn((a: string, b: number) => `${a}-${b}`);
     const delay = 100;
 
@@ -193,25 +193,25 @@ describe('createThrottle', () => {
     });
 
     // TypeScript should enforce correct argument types
-    throttledFn('test', 42);
+    throttledFn("test", 42);
     await vi.advanceTimersByTimeAsync(delay);
 
     expect(mockFn).toHaveBeenCalledTimes(1);
-    expect(mockFn).toHaveBeenCalledWith('test', 42);
+    expect(mockFn).toHaveBeenCalledWith("test", 42);
   });
 
-  it('should work with async functions', async () => {
-    const mockAsyncFn = vi.fn().mockResolvedValue('result');
+  it("should work with async functions", async () => {
+    const mockAsyncFn = vi.fn().mockResolvedValue("result");
     const delay = 100;
 
     const throttledFn = createRoot(() => {
       return createThrottle(mockAsyncFn, delay);
     });
 
-    throttledFn('test');
+    throttledFn("test");
     await vi.advanceTimersByTimeAsync(delay);
 
     expect(mockAsyncFn).toHaveBeenCalledTimes(1);
-    expect(mockAsyncFn).toHaveBeenCalledWith('test');
+    expect(mockAsyncFn).toHaveBeenCalledWith("test");
   });
 });
