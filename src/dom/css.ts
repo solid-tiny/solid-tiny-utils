@@ -56,6 +56,9 @@ export function combineStyle(
   return { ...a, ...bb };
 }
 
-export function combineClass(defaultClass: string, ...otherClass: string[]) {
+export function combineClass(
+  defaultClass: string,
+  ...otherClass: (string | undefined | null)[]
+) {
   return [defaultClass, ...otherClass].filter(Boolean).join(" ");
 }
