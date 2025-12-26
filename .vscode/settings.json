@@ -1,5 +1,6 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.experimental.useTsgo": true,
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },

@@ -5,7 +5,6 @@
     "jsx": "preserve",
     "lib": ["ES2022", "DOM"],
     "jsxImportSource": "solid-js",
-    "baseUrl": ".",
     "module": "ESNext",
     "moduleResolution": "node",
     "strict": true,
@@ -14,7 +13,8 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "paths": {
-      "~/*": ["../src/*"]
+      "~/*": ["../src/*"],
+      "*": ["./*"]
     }
   },
   "include": ["src/**/*"]
