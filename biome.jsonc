@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": ["ultracite"],
+  "extends": ["ultracite/core", "ultracite/solid"],
   "linter": {
     "rules": {
       "style": {
@@ -11,12 +11,13 @@
         "useHookAtTopLevel": "off"
       },
       "suspicious": {
-        "noUnassignedVariables": "off"
+        "noUnassignedVariables": "off",
+        "noConsole": "warn"
       },
       "performance": {
         "noBarrelFile": "off"
       },
-      "nursery": "off"
+      "a11y": "off"
     }
   }
 }

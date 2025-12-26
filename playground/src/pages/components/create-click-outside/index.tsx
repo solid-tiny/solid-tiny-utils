@@ -13,17 +13,17 @@ export default function Index() {
   });
 
   return (
-    <div class="select-none h-600px">
+    <div class="h-600px select-none">
       <div class="b b-solid b-gray-300 p-2">outside count: {count()}</div>
 
-      <div class="mt-2 px-2 py-8 bg-blue" ref={ref}>
+      <div class="mt-2 bg-blue px-2 py-8" ref={ref}>
         inside
       </div>
-      <div class="mt-5 p-2 bg-red">
+      <div class="mt-5 bg-red p-2">
         This and other elements except 'inside' and 'ignore me' should trigger
         click-outside callback
       </div>
-      <div class="mt-5 p-2 bg-amber" ref={refIgnore}>
+      <div class="mt-5 bg-amber p-2" ref={refIgnore}>
         ignore me
       </div>
     </div>

@@ -2,7 +2,7 @@ import routeInfo from "virtual:route-info";
 import { For } from "solid-js";
 
 function ItemHeader(props: { title: string }) {
-  return <div class="b-b text-gray-500 mt-2 pb-1">{props.title}</div>;
+  return <div class="b-b mt-2 pb-1 text-gray-500">{props.title}</div>;
 }
 
 function Item(props: { title: string; path: string }) {

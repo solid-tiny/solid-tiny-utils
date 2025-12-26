@@ -26,12 +26,12 @@ export function App() {
   return (
     <Router
       root={(props) => (
-        <div class="flex h-screen w-screen overflow-hidden flex-col bg-white">
+        <div class="flex h-screen w-screen flex-col overflow-hidden bg-white">
           <div class="h-45px w-full bg-gray-100">
             <Header />
           </div>
           <div class="flex h-[calc(100%-45px)] w-full">
-            <div class="h-full w-185px bg-gray-100 overflow-auto">
+            <div class="h-full w-185px overflow-auto bg-gray-100">
               <Aside />
             </div>
             <Suspense>

@@ -19,12 +19,12 @@ export default function Index() {
           {isVisible2() ? "Element2 is visible" : "Element2 is not visible"}
         </div>
       </div>
-      <div class="text-xl font-bold p-2 b b-solid b-amber mt-2 h-400px overflow-auto">
+      <div class="b b-solid b-amber mt-2 h-400px overflow-auto p-2 font-bold text-xl">
         <div class="h-1000px">
-          <div class="p-2 bg-blue mt-100px" ref={setRef}>
+          <div class="mt-100px bg-blue p-2" ref={setRef}>
             element1
           </div>
-          <div class="p-2 bg-blue mt-100px mt-10" ref={setRef2}>
+          <div class="mt-10 mt-100px bg-blue p-2" ref={setRef2}>
             element2
           </div>
         </div>
