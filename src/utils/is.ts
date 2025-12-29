@@ -108,3 +108,11 @@ export const isEmpty = (value: any) => {
 };
 
 export const isClient = !isServer;
+
+export function isUndefined(value: any): value is undefined {
+  return typeof value === "undefined";
+}
+
+export function isDefined<T>(value: T | undefined): value is T {
+  return !isUndefined(value);
+}
