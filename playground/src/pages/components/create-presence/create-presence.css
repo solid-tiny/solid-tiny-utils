@@ -1,0 +1,33 @@
+.with-animated {
+  animation-duration: 240ms;
+}
+
+.with-animated[data-opening] {
+  animation-name: st-fade-in;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.with-animated[data-closing] {
+  animation-name: st-fade-out;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes st-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes st-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
