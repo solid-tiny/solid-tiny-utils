@@ -17,7 +17,7 @@
     "lint:error": "pnpm dlx ultracite@latest check --diagnostic-level error",
     "lint:fix": "pnpm dlx ultracite@latest fix",
     "type-check": "tsgo --noEmit --skipLibCheck",
-    "bump": "pnpm type-check && pnpm lint:fix && pnpm test && pnpm bumpp --no-push",
+    "bump": "pnpm type-check && pnpm lint && pnpm test && pnpm bumpp --no-push",
     "prepublish": "pnpm build"
   },
   "sideEffects": false,
