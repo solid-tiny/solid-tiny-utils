@@ -1,6 +1,6 @@
 {
   "name": "solid-tiny-utils",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "A collection of tiny utilities for SolidJS applications",
   "main": "./dist/index.mjs",
   "type": "module",
