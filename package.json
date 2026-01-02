@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.10",
+    "@formkit/auto-animate": "^0.9.0",
     "@solidjs/router": "^0.15.4",
     "@solidjs/testing-library": "^0.8.10",
     "@testing-library/jest-dom": "^6.9.1",
