@@ -8,7 +8,7 @@ export default function Index() {
   const [withAnimation, setWithAnimation] = createSignal(true);
   const [ref, setRef] = createSignal<HTMLElement | undefined>();
 
-  const presence = createPresence({
+  const [show, state] = createPresence({
     show: visible,
     element: ref,
   });
@@ -31,17 +31,17 @@ export default function Index() {
             {withAnimation() ? "Disable Animation" : "Enable Animation"}
           </button>
 
-          <div>presence.show: {presence.show() ? "true" : "false"}</div>
-          <div class="ml-4">state: {presence.state()}</div>
+          <div>presence.show: {show() ? "true" : "false"}</div>
+          <div class="ml-4">state: {state()}</div>
         </div>
       </div>
 
       <div class="mt-3">
-        <Show when={presence.show()}>
+        <Show when={show()}>
           <div
             class={`b b-solid ${withAnimation() ? "with-animated" : ""} mt-3 bg-blue p-4`}
-            data-closing={dataIf(presence.state() === "closing")}
-            data-opening={dataIf(presence.state() === "opening")}
+            data-closing={dataIf(state() === "closing")}
+            data-opening={dataIf(state() === "opening")}
             ref={setRef}
           >
             <div class="font-bold">I am a presence-controlled element</div>

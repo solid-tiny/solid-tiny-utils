@@ -1,4 +1,4 @@
-import { type Accessor, createSignal } from "solid-js";
+import { type Accessor, createMemo, createSignal } from "solid-js";
 import { hasAnimation } from "../dom";
 import { noop } from "../fn";
 import { access, createWatch } from "../reactive";
@@ -14,8 +14,10 @@ export function createPresence(params: {
     access(params.show) ? "opened" : "closed"
   );
 
+  const showMemo = createMemo(() => access(params.show));
+
   createWatch(
-    params.show,
+    showMemo,
     (show) => {
       if (show) {
         setState("opening");
@@ -36,22 +38,15 @@ export function createPresence(params: {
 
     if (current.endsWith("ing")) {
       if (hasAnimation(el)) {
-        clear = makeEventListener(
-          el,
-          "animationend",
-          () => {
-            setState(current === "opening" ? "opened" : "closed");
-          },
-          { once: true }
-        );
+        clear = makeEventListener(el, "animationend", () => {
+          setState(current === "opening" ? "opened" : "closed");
+        });
       } else {
         setState(current === "opening" ? "opened" : "closed");
       }
     }
   });
 
-  return {
-    show: () => state() !== "closed",
-    state,
-  };
+  const shouldRender = createMemo(() => state() !== "closed");
+  return [shouldRender, state] as const;
 }

@@ -1,15 +1,13 @@
-.with-animated {
-  animation-duration: 240ms;
-}
-
 .with-animated[data-opening] {
   animation-name: st-fade-in;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-duration: 240ms;
 }
 
 .with-animated[data-closing] {
   animation-name: st-fade-out;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-duration: 240ms;
 }
 
 @keyframes st-fade-in {
