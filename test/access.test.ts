@@ -1,6 +1,6 @@
 import { createRoot, createSignal } from "solid-js";
 import { describe, expect, it } from "vitest";
-import { access } from "../src/reactive/access";
+import { access } from "~/solidjs";
 
 describe("access", () => {
   it("should return value directly for non-function values", () => {

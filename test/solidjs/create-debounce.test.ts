@@ -1,6 +1,6 @@
 import { createRoot, createSignal } from "solid-js";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { createDebounce } from "~/fn";
+import { createDebounce } from "~/solidjs";
 
 describe("createDebounce", () => {
   beforeEach(() => {

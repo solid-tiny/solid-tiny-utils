@@ -1,7 +1,7 @@
 import { createMemo, createRoot, createSignal } from "solid-js";
 import { createStore } from "solid-js/store";
 import { describe, expect, it, vi } from "vitest";
-import { createWatch } from "~/reactive";
+import { createWatch } from "~/solidjs";
 
 describe("createWatch", () => {
   it("should watch a single signal and execute callback on changes", () => {

@@ -2,7 +2,7 @@ import { render } from "@solidjs/testing-library";
 import userEvent from "@testing-library/user-event";
 import { createSignal, onMount } from "solid-js";
 import { describe, expect, it } from "vitest";
-import { makeEventListener } from "~/event";
+import { makeEventListener } from "~/solidjs";
 
 const TestComponent = () => {
   let refTrigger!: HTMLDivElement;

@@ -1,6 +1,6 @@
 import { createRoot, createSignal } from "solid-js";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { createThrottle } from "~/fn";
+import { createThrottle } from "~/solidjs";
 
 describe("createThrottle", () => {
   beforeEach(() => {

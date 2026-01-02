@@ -1,8 +1,8 @@
 import { type Accessor, createMemo, createSignal } from "solid-js";
 import { hasAnimation } from "../dom";
-import { noop } from "../fn";
-import { access, createWatch } from "../reactive";
+import { access, createWatch } from "../solidjs";
 import type { MaybeAccessor } from "../types/maybe";
+import { noop } from "../utils";
 import { makeEventListener } from ".";
 
 export type PresenceState = "opening" | "opened" | "closing" | "closed";

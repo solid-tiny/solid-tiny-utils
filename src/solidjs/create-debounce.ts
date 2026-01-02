@@ -1,8 +1,8 @@
 import { onCleanup } from "solid-js";
-import { access } from "~/reactive";
 import type { MaybeAccessor } from "~/types";
+import { access } from "./utils";
 
-export function createThrottle<Args extends unknown[]>(
+export function createDebounce<Args extends unknown[]>(
   callback: (...args: Args) => void,
   delay: MaybeAccessor<number>
 ): (...args: Args) => void {
@@ -13,12 +13,9 @@ export function createThrottle<Args extends unknown[]>(
   });
 
   const run = (...args: Args) => {
-    if (timeoutId) {
-      return;
-    }
+    clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
       callback(...args);
-      timeoutId = undefined;
     }, access(delay));
   };
 

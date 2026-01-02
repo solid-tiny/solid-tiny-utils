@@ -1,5 +1,5 @@
 import type { Accessor, AccessorArray, OnOptions } from "solid-js";
-import { createDebounce } from "~/fn";
+import { createDebounce } from "~/solidjs";
 import { createWatch } from "./create-watch";
 
 /**

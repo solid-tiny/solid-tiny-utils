@@ -1,5 +1,5 @@
 import { type Accessor, createSignal, onCleanup } from "solid-js";
-import { access, createWatch } from "~/reactive";
+import { access, createWatch } from "~/solidjs";
 import type { MaybeNullableAccessor } from "~/types";
 import { isObject } from "~/utils";
 

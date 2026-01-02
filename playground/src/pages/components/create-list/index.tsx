@@ -1,6 +1,6 @@
 import { createAutoAnimate } from "@formkit/auto-animate/solid";
 import { For } from "solid-js";
-import { createList } from "~/reactive";
+import { createList } from "~/solidjs";
 
 export default function Demo() {
   const [list, helpers] = createList([

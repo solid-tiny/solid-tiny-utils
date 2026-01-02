@@ -1,6 +1,6 @@
 import { createRoot, createSignal } from "solid-js";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { createDebouncedWatch } from "~/reactive";
+import { createDebouncedWatch } from "~/solidjs";
 
 describe("createDebouncedWatch", () => {
   beforeEach(() => {

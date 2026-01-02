@@ -1,6 +1,6 @@
-import { access } from "~/reactive";
 import type { MaybeAccessor } from "~/types";
 import { makeEventListener } from "./make-event-listener";
+import { access } from "./utils";
 
 export function createClickOutside(
   target: MaybeAccessor<HTMLElement | null | undefined>,

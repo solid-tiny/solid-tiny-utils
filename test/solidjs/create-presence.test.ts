@@ -1,16 +1,16 @@
 import { createRoot, createSignal } from "solid-js";
 import { describe, expect, it } from "vitest";
-import { createPresence } from "../../src/event";
+import { createPresence } from "~/solidjs";
 
 describe("createPresence", () => {
   it("initializes closed when show is false", () => {
     createRoot((dispose) => {
       const [show] = createSignal(false);
       const el = document.createElement("div");
-      const presence = createPresence({ show, element: () => el });
+      const [render, state] = createPresence({ show, element: () => el });
 
-      expect(presence.state()).toBe("closed");
-      expect(presence.show()).toBe(false);
+      expect(state()).toBe("closed");
+      expect(render()).toBe(false);
       dispose();
     });
   });
@@ -20,22 +20,23 @@ describe("createPresence", () => {
       const [show, setShow] = createSignal(false);
       const el = document.createElement("div");
 
-      const presence = createPresence({ show, element: () => el });
+      const [render, state] = createPresence({ show, element: () => el });
 
       return {
-        presence,
+        render,
+        state,
         setShow,
         dispose,
       };
     });
 
-    expect(h.presence.show()).toBe(false);
-    expect(h.presence.state()).toBe("closed");
+    expect(h.render()).toBe(false);
+    expect(h.state()).toBe("closed");
 
     // open
     h.setShow(true);
-    expect(h.presence.show()).toBe(true);
-    expect(h.presence.state()).toBe("opened");
+    expect(h.render()).toBe(true);
+    expect(h.state()).toBe("opened");
 
     h.dispose();
   });
@@ -45,14 +46,15 @@ describe("createPresence", () => {
       const [show, setShow] = createSignal(false);
       const el = document.createElement("div");
       el.style.animationDuration = "100ms";
-      const presence = createPresence({ show, element: () => el });
+      const [render, state] = createPresence({ show, element: () => el });
 
       const fireAnimationEnd = () => {
         el.dispatchEvent(new Event("animationend"));
       };
 
       return {
-        presence,
+        render,
+        state,
         setShow,
         fireAnimationEnd,
         dispose,
@@ -60,12 +62,12 @@ describe("createPresence", () => {
     });
 
     h.setShow(true);
-    expect(h.presence.show()).toBe(true);
-    expect(h.presence.state()).toBe("opening");
+    expect(h.render()).toBe(true);
+    expect(h.state()).toBe("opening");
 
     // simulate animation end
     h.fireAnimationEnd();
-    expect(h.presence.show()).toBe(true);
-    expect(h.presence.state()).toBe("opened");
+    expect(h.render()).toBe(true);
+    expect(h.state()).toBe("opened");
   });
 });

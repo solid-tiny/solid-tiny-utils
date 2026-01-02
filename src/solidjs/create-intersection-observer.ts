@@ -1,9 +1,9 @@
 import { onCleanup } from "solid-js";
 import { isServer } from "solid-js/web";
-import { noop } from "~/fn";
-import { access, createWatch } from "~/reactive";
+import { access, createWatch } from "~/solidjs";
 import type { Fn, MaybeAccessor } from "~/types";
 import { clearArray } from "~/utils";
+import { noop } from "../utils";
 
 export function createIntersectionObserver(
   targets: MaybeAccessor<HTMLElement | null | undefined>[],

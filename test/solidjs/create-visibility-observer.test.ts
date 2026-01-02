@@ -1,7 +1,7 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: test */
 import { createRoot } from "solid-js";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { createVisibilityObserver } from "~/event";
+import { createVisibilityObserver } from "~/solidjs";
 import {
   getAllMockedIOInstances,
   getLastMockedIOInstance,

@@ -2,7 +2,7 @@ import { render } from "@solidjs/testing-library";
 import userEvent from "@testing-library/user-event";
 import { createSignal } from "solid-js";
 import { describe, expect, it } from "vitest";
-import { createClickOutside } from "~/event";
+import { createClickOutside } from "~/solidjs";
 
 const TestComponent = () => {
   const [refTrigger, setRefTrigger] = createSignal<HTMLDivElement | null>(null);

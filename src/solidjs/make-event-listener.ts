@@ -1,8 +1,8 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: I need any */
 import { onCleanup } from "solid-js";
-import { noop } from "~/fn";
 import type { Fn, MaybeArray } from "~/types";
 import { clearArray, isArray } from "~/utils";
+import { noop } from "../utils";
 
 interface InferEventTarget<Events> {
   addEventListener: (event: Events, fn?: any, options?: any) => any;

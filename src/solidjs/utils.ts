@@ -1,11 +1,10 @@
-export * from "./create-click-outside";
-export * from "./create-event-listener";
-export * from "./create-intersection-observer";
-export * from "./create-presence";
-export * from "./create-visibility-observer";
-export * from "./make-event-listener";
+import type { JSX } from "solid-js";
+import type { MaybeAccessor } from "~/types/maybe";
+import { isFn } from "~/utils";
 
-import type { JSX } from "solid-js/jsx-runtime";
+export function access<T>(value: MaybeAccessor<T>): T {
+  return isFn(value) ? value() : value;
+}
 
 export function runSolidEventHandler<
   T,

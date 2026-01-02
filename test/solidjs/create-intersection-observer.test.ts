@@ -1,8 +1,8 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: test */
 import { createRoot, createSignal } from "solid-js";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { createIntersectionObserver } from "~/event";
-import { noop } from "~/fn";
+import { createIntersectionObserver } from "~/solidjs";
+import { noop } from "~/utils";
 import {
   getAllMockedIOInstances,
   getLastMockedIOInstance,
