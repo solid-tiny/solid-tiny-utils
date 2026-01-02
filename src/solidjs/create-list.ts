@@ -1,5 +1,5 @@
 import { createStore, type SetStoreFunction, unwrap } from "solid-js/store";
-import { inRange } from "solid-tiny-utils";
+import { inRange } from "~/utils";
 
 function createInsertHelper<T>(setList: SetStoreFunction<T[]>) {
   return (item: T, at?: number) => {

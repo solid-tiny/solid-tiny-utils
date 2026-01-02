@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation> */
 import type { JSX } from "solid-js";
 import type { MaybeAccessor } from "~/types/maybe";
 import { isFn } from "~/utils";
@@ -9,7 +10,6 @@ export function access<T>(value: MaybeAccessor<T>): T {
 export function runSolidEventHandler<
   T,
   E extends Event,
-  // biome-ignore lint/suspicious/noExplicitAny: any
   EHandler extends JSX.EventHandler<T, any> = JSX.EventHandler<T, E>,
 >(event: E, handler?: EHandler | JSX.BoundEventHandler<T, E, EHandler>) {
   if (typeof handler === "function") {
@@ -19,4 +19,14 @@ export function runSolidEventHandler<
   if (Array.isArray(handler)) {
     handler[0](handler[1], event);
   }
+}
+
+export type MaybeCallableChild<T extends unknown[] = []> =
+  | JSX.Element
+  | ((...args: T) => JSX.Element);
+export function callMaybeCallableChild<T extends unknown[] = []>(
+  children: MaybeCallableChild<T>,
+  ...args: T
+) {
+  return isFn(children) ? children(...args) : children;
 }

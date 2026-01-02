@@ -29,8 +29,7 @@ export const isPrimitive = (value: any): boolean => {
 
 // biome-ignore lint/complexity/noBannedTypes: I need this
 export const isFn = (value: any): value is Function => {
-  // biome-ignore lint/complexity/useOptionalChain: much shorter
-  return !!(value && value.constructor && value.call && value.apply);
+  return typeof value === "function";
 };
 
 export const isString = (value: any): value is string => {
