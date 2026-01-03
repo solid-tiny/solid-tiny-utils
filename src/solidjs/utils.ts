@@ -1,7 +1,7 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: <explanation> */
 import type { JSX } from "solid-js";
 import type { MaybeAccessor } from "~/types/maybe";
-import { isFn } from "~/utils";
+import { isArray, isFn } from "~/utils";
 
 export function access<T>(value: MaybeAccessor<T>): T {
   return isFn(value) ? value() : value;
@@ -12,12 +12,15 @@ export function runSolidEventHandler<
   E extends Event,
   EHandler extends JSX.EventHandler<T, any> = JSX.EventHandler<T, E>,
 >(event: E, handler?: EHandler | JSX.BoundEventHandler<T, E, EHandler>) {
-  if (typeof handler === "function") {
+  if (isFn(handler)) {
     handler(event);
+    return;
   }
 
-  if (Array.isArray(handler)) {
-    handler[0](handler[1], event);
+  if (isArray(handler)) {
+    const h = handler[0] as any;
+    const data = handler[1] as any;
+    h(data, event);
   }
 }
 
