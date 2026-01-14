@@ -10,4 +10,5 @@ export * from "./create-throttle";
 export * from "./create-visibility-observer";
 export * from "./create-watch";
 export * from "./make-event-listener";
+export * from "./make-presence";
 export * from "./utils";
