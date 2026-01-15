@@ -1,73 +1,93 @@
 import { createRoot, createSignal } from "solid-js";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createPresence } from "~/solidjs";
 
 describe("createPresence", () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it("initializes closed when show is false", () => {
     createRoot((dispose) => {
       const [show] = createSignal(false);
-      const el = document.createElement("div");
-      const [render, state] = createPresence({ show, element: () => el });
 
-      expect(state()).toBe("closed");
-      expect(render()).toBe(false);
+      const p = createPresence(show, {
+        enterDuration: 300,
+        exitDuration: 500,
+      });
+
+      expect(p.isMounted()).toBe(false);
+      expect(p.isAnimating()).toBe(false);
+      expect(p.isExiting()).toBe(false);
+      expect(p.isVisible()).toBe(false);
+      expect(p.isEntering()).toBe(false);
+      expect(p.phase()).toBe("idle");
       dispose();
     });
   });
 
-  it("immediately opens when there is no animation", () => {
-    const h = createRoot((dispose) => {
-      const [show, setShow] = createSignal(false);
-      const el = document.createElement("div");
-
-      const [render, state] = createPresence({ show, element: () => el });
-
-      return {
-        render,
-        state,
-        setShow,
-        dispose,
-      };
+  it("initializes open when show is true", () => {
+    createRoot((dispose) => {
+      const [show] = createSignal(true);
+      const p = createPresence(show, {
+        enterDuration: 300,
+        exitDuration: 500,
+      });
+      expect(p.isMounted()).toBe(true);
+      expect(p.isAnimating()).toBe(false);
+      expect(p.isExiting()).toBe(false);
+      expect(p.isVisible()).toBe(true);
+      expect(p.isEntering()).toBe(false);
+      expect(p.phase()).toBe("entered");
+      dispose();
     });
-
-    expect(h.render()).toBe(false);
-    expect(h.state()).toBe("closed");
-
-    // open
-    h.setShow(true);
-    expect(h.render()).toBe(true);
-    expect(h.state()).toBe("opened");
-
-    h.dispose();
   });
 
-  it("waits for animationend when element has animation and toggles state on events", () => {
-    const h = createRoot((dispose) => {
-      const [show, setShow] = createSignal(false);
-      const el = document.createElement("div");
-      el.style.animationDuration = "100ms";
-      const [render, state] = createPresence({ show, element: () => el });
+  it("initializes open when show is true with initial open", () => {
+    createRoot((dispose) => {
+      const [show] = createSignal(true);
+      const p = createPresence(show, {
+        enterDuration: 300,
+        exitDuration: 500,
+        initialEnter: true,
+      });
 
-      const fireAnimationEnd = () => {
-        el.dispatchEvent(new Event("animationend"));
-      };
-
-      return {
-        render,
-        state,
-        setShow,
-        fireAnimationEnd,
-        dispose,
-      };
+      expect(p.isMounted()).toBe(true);
+      expect(p.isAnimating()).toBe(false);
+      expect(p.isExiting()).toBe(false);
+      expect(p.isVisible()).toBe(false);
+      expect(p.isEntering()).toBe(false);
+      expect(p.phase()).toBe("pre-enter");
+      dispose();
     });
+  });
 
-    h.setShow(true);
-    expect(h.render()).toBe(true);
-    expect(h.state()).toBe("opening");
+  it("transitions to entering when show changes from false to true", async () => {
+    await createRoot(async (dispose) => {
+      const [show, setShow] = createSignal(false);
+      const p = createPresence(show, {
+        enterDuration: 100,
+        exitDuration: 100,
+      });
+      expect(p.isMounted()).toBe(false);
+      setShow(true);
+      await vi.advanceTimersByTimeAsync(50);
+      expect(p.isMounted()).toBe(true);
+      expect(p.isAnimating()).toBe(true);
+      expect(p.isEntering()).toBe(true);
+      expect(p.phase()).toBe("entering");
+      await vi.advanceTimersByTimeAsync(500);
+      expect(p.isMounted()).toBe(true);
+      expect(p.isAnimating()).toBe(false);
+      expect(p.isVisible()).toBe(true);
+      expect(p.isEntering()).toBe(false);
+      expect(p.phase()).toBe("entered");
 
-    // simulate animation end
-    h.fireAnimationEnd();
-    expect(h.render()).toBe(true);
-    expect(h.state()).toBe("opened");
+      dispose();
+    });
   });
 });
