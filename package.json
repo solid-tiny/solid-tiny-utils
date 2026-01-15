@@ -2,7 +2,16 @@
   "name": "solid-tiny-utils",
   "version": "0.11.0",
   "description": "A collection of tiny utilities for SolidJS applications",
-  "main": "./dist/index.mjs",
+  "author": "solid tiny",
+  "license": "MIT",
+  "homepage": "https://github.com/solid-tiny/solid-tiny-utils#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solid-tiny/solid-tiny-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/solid-tiny/solid-tiny-utils/issues"
+  },
   "type": "module",
   "files": [
     "dist"
@@ -13,9 +22,9 @@
     "test": "vitest --run",
     "clean": "rimraf dist node_modules pnpm-lock.yaml",
     "test:ui": "vitest --ui",
-    "lint": "pnpm dlx ultracite@latest check",
-    "lint:error": "pnpm dlx ultracite@latest check --diagnostic-level error",
-    "lint:fix": "pnpm dlx ultracite@latest fix",
+    "lint": "pnpm ultracite check",
+    "lint:error": "pnpm ultracite check --diagnostic-level error",
+    "lint:fix": "pnpm ultracite fix",
     "type-check": "tsgo --noEmit --skipLibCheck",
     "bump": "pnpm type-check && pnpm test && pnpm bumpp --no-push",
     "prepublish": "pnpm build"
@@ -25,7 +34,7 @@
     "solid-js": "^1.9.7"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.10",
+    "@biomejs/biome": "2.3.11",
     "@formkit/auto-animate": "^0.9.0",
     "@solidjs/router": "^0.15.4",
     "@solidjs/testing-library": "^0.8.10",
@@ -33,14 +42,14 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/culori": "^4.0.0",
     "@types/node": "^25.0.3",
-    "@typescript/native-preview": "7.0.0-dev.20260102.1",
+    "@typescript/native-preview": "7.0.0-dev.20260114.1",
     "@vitest/ui": "^4.0.16",
     "bumpp": "^10.3.2",
     "culori": "^4.0.2",
     "jsdom": "^27.3.0",
     "solid-tiny-context": "0.2.3",
-    "tsdown": "^0.18.4",
-    "ultracite": "7.0.5",
+    "tsdown": "^0.19.0",
+    "ultracite": "7.0.11",
     "unocss": "^66.3.3",
     "vite": "^7.3.0",
     "vite-plugin-solid": "^2.11.10",
@@ -54,10 +63,7 @@
     "typescript",
     "utils"
   ],
-  "author": "",
-  "license": "MIT",
-  "packageManager": "pnpm@10.24.0",
-  "module": "./dist/index.mjs",
+  "packageManager": "pnpm@10.28.0",
   "types": "./dist/index.d.mts",
   "exports": {
     ".": "./dist/index.mjs",
