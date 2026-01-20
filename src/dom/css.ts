@@ -1,4 +1,5 @@
 import type { JSX } from "solid-js/jsx-runtime";
+import { access } from "~/solidjs";
 import { isClient } from "~/utils";
 
 const alreadyInjected: string[] = [];
@@ -13,7 +14,11 @@ const alreadyInjected: string[] = [];
  * @param id - The id of the style element.
  * @param refresh - Whether to refresh the style if it already exists. Defaults to **false**.
  */
-export function mountStyle(style: string, id: string, refresh = false) {
+export function mountStyle(
+  style: string | (() => string),
+  id: string,
+  refresh = false
+) {
   if (!isClient) {
     return;
   }
@@ -24,13 +29,13 @@ export function mountStyle(style: string, id: string, refresh = false) {
   let styleElement = document.querySelector(`style#${id}`);
 
   if (styleElement) {
-    styleElement.innerHTML = style;
+    styleElement.innerHTML = access(style);
     return;
   }
 
   styleElement = document.createElement("style");
   styleElement.id = id;
-  styleElement.innerHTML = style;
+  styleElement.innerHTML = access(style);
   document.head.appendChild(styleElement);
   alreadyInjected.push(id);
 }
