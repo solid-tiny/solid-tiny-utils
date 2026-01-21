@@ -35,7 +35,7 @@ export function mountStyle(
 
   styleElement = document.createElement("style");
   styleElement.id = id;
-  styleElement.innerHTML = access(style);
+  styleElement.textContent = access(style);
   document.head.appendChild(styleElement);
   alreadyInjected.push(id);
 }
