@@ -29,7 +29,7 @@ export function mountStyle(
   let styleElement = document.querySelector(`style#${id}`);
 
   if (styleElement) {
-    styleElement.innerHTML = access(style);
+    styleElement.textContent = access(style);
     return;
   }
 
